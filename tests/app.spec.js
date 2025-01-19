@@ -15,16 +15,29 @@ test('App loads and displays content', async ({ page }) => {
   expect(outputSection).toBe(true);
 });
 
-test('Converting Python dict to JSON', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+[
+  {
+    input: "{'name': 'John', 'age': 30}",
+    expectedOutput: '{\n  "name": "John",\n  "age": 30\n}',
+  },
+  {
+    input: "{'city': 'New York', 'country': 'USA'}",
+    expectedOutput: '{\n  "city": "New York",\n  "country": "USA"\n}',
+  },
+  // Add more test cases as needed
+].forEach(({ input, expectedOutput }) => {
+  test(`Converting Python dict to JSON with input: ${input}`, async ({ page }) => {
+    await page.goto('http://localhost:3000');
 
-  // Enter a Python dictionary in the input textarea
-  await page.fill('textarea', "{'name': 'John', 'age': 30}");
+    // Enter the Python dictionary in the input textarea
+    await page.fill('textarea', input);
 
-  // Wait for the output to be generated
-  await page.waitForSelector('.output-content');
+    // Wait for the output to be generated
+    await page.waitForSelector('.output-content');
 
-  // Check if the output is the expected JSON
-  const outputJson = await page.textContent('.output-content');
-  expect(outputJson).toBe('{\n  "name": "John",\n  "age": 30\n}');
+    // Check if the output matches the expected JSON
+    const outputJson = await page.textContent('.output-content');
+    expect(outputJson).toBe(expectedOutput);
+  });
 });
+
