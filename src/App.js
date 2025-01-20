@@ -69,6 +69,7 @@ function App() {
             input={input}
             setInput={setInput}
             handleFileUpload={handleFileUpload}
+            error={error}
           />
         )}
         
