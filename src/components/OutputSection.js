@@ -6,6 +6,7 @@ function OutputSection({ output, error, handleCopy }) {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleCursorMove = (e) => {
+    console.log("handleCursorMove output")
     const text = e.target.value;
     const cursorPosition = e.target.selectionStart;
     const linesBeforeCursor = text.slice(0, cursorPosition).split('\n');
@@ -35,7 +36,6 @@ function OutputSection({ output, error, handleCopy }) {
         <textarea
           className="output-content"
           value={output || (error && `Error: ${error}`)}
-          readOnly
           spellCheck="false"
           onKeyUp={handleCursorMove}
           onClick={handleCursorMove}

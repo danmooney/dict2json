@@ -214,7 +214,7 @@ textarea {
 }
 
 .output-content {
-  background-color: #f8f9fa;
+  background-color: transparent !important;
 }
 
 .output textarea {
