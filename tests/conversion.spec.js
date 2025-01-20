@@ -45,6 +45,19 @@ import { test, expect } from '@playwright/test';
     input: `\n\n    {'data': {'nested': {"stuff": "{in quotes ' \\" the raven }"}}}    \n\n`,
     expectedOutput: '{\n  "data": {\n    "nested": {\n      "stuff": "{in quotes \' \\" the raven }"\n    }\n  }\n}',
   },
+  {
+    input: `\n\n    {'data': {'nested': {"list": ["{in quotes ' \\" the raven }", "{}}}}"]}}}    \n\n`,
+    expectedOutput: `{
+  "data": {
+    "nested": {
+      "list": [
+        "{in quotes ' \\" the raven }",
+        "{}}}}"
+      ]
+    }
+  }
+}`
+  },
 ].forEach(({ input, expectedOutput }) => {
   test(`Converting Python dict to JSON with input: ${input}`, async ({ page }) => {
     await page.goto('http://localhost:3000');
