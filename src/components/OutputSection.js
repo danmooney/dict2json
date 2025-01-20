@@ -4,13 +4,42 @@ import Toolbar from './Toolbar';
 function OutputSection({ output, error, handleCopy }) {
   const [currentLine, setCurrentLine] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
+  const [cursorPosition, setCursorPosition] = useState({ start: 0, end: 0 });
 
   const handleCursorMove = (e) => {
-    console.log("handleCursorMove output")
     const text = e.target.value;
-    const cursorPosition = e.target.selectionStart;
-    const linesBeforeCursor = text.slice(0, cursorPosition).split('\n');
+    const start = e.target.selectionStart;
+    const end = e.target.selectionEnd;
+    const linesBeforeCursor = text.slice(0, start).split('\n');
     setCurrentLine(linesBeforeCursor.length - 1);
+    setCursorPosition({ start, end });
+  };
+
+  const handleKeyDown = (e) => {
+    // Navigation keys that should always be allowed
+    const navigationKeys = [
+      'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+      'Home', 'End', 'PageUp', 'PageDown',
+      'Tab', 'Shift', 'Control', 'Alt', 'Meta'
+    ];
+
+    // If it's a navigation key, allow it
+    if (navigationKeys.includes(e.key)) {
+      return;
+    }
+
+    // For any other key, require Ctrl/Cmd modifier
+    if (!e.ctrlKey && !e.metaKey) {
+      e.preventDefault();
+      e.target.setSelectionRange(cursorPosition.start, cursorPosition.end);
+      return;
+    }
+
+    // If we get here, we have Ctrl/Cmd pressed. Only allow specific keys
+    if (!['c', 'v', 'x', 'a'].includes(e.key)) {
+      e.preventDefault();
+      e.target.setSelectionRange(cursorPosition.start, cursorPosition.end);
+    }
   };
 
   return (
@@ -39,8 +68,9 @@ function OutputSection({ output, error, handleCopy }) {
           className="output-content"
           value={output || (error && `Error: ${error}`)}
           spellCheck="false"
-          onKeyUp={handleCursorMove}
+          onKeyDown={handleKeyDown}
           onClick={handleCursorMove}
+          onMouseUp={handleCursorMove}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
