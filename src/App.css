@@ -6,6 +6,7 @@
   --tooltip-text: #ffffff;
   --success-bg: #059669;
   --success-text: #ffffff;
+  --highlight-line: #e3f2fd;
 }
 
 .app {
@@ -154,12 +155,43 @@ pre {
   user-select: none;
   text-align: right;
   color: #6c757d;
+  position: relative;
+  z-index: 1;
 }
 
 .line-number {
   font-family: var(--font-mono);
   font-size: 14px;
   line-height: 1.5;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.line-number-wrapper.current .line-number {
+  color: var(--tooltip-bg);
+  font-weight: 500;
+}
+
+.editor-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: linear-gradient(transparent 0px, var(--highlight-line) 0px) no-repeat;
+  background-size: 100% 24px;
+  background-position-y: var(--line-offset);
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  z-index: 0;
+}
+
+.editor-container.focused::before {
+  opacity: 1;
 }
 
 textarea {
@@ -168,13 +200,17 @@ textarea {
   padding: 10px;
   font-family: var(--font-mono);
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 24px;
   border: none;
   resize: vertical;
   background: transparent;
   white-space: pre-wrap;
   word-wrap: break-word;
   outline: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .output-content {
@@ -187,16 +223,6 @@ textarea {
 
 .error {
   color: #dc3545;
-}
-
-/* Highlight current line */
-textarea:focus {
-  background: #fff;
-}
-
-textarea:focus + .line-numbers .line-number.current {
-  background: #e2e6ea;
-  font-weight: bold;
 }
 
 .toast {
