@@ -16,6 +16,8 @@ function InputSection({ input, setInput, handleFileUpload }) {
     <div className="input">
       <div className="section-header">
         <h2>Python Dictionary</h2>
+      </div>
+      <div className="editor-header">
         <Toolbar onFileUpload={handleFileUpload} />
       </div>
       <div 

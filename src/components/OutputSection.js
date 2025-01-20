@@ -17,6 +17,8 @@ function OutputSection({ output, error, handleCopy }) {
     <div className="output">
       <div className="section-header">
         <h2>JSON Output</h2>
+      </div>
+      <div className="editor-header">
         <Toolbar onCopy={handleCopy} isOutput={true} />
       </div>
       <div
