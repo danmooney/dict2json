@@ -50,4 +50,29 @@ test('Copy to clipboard works in mobile view', async ({ page }) => {
   const toast = page.locator('.toast');
   await expect(toast).toBeVisible();
   await expect(toast).toContainText('Copied to clipboard!');
+});
+
+test('Copy error message to clipboard when error exists', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+  
+  // Enter invalid Python dictionary
+  await page.fill('textarea', "{'invalid': syntax}}");
+  
+  // Wait for error to appear
+  const expectedError = await page.locator('.output-content').inputValue();
+  
+  // Click copy button
+  await page.getByTestId('copy-button').click();
+  
+  // Wait for clipboard operation to complete
+  await page.waitForTimeout(100);
+  
+  // Get clipboard content and verify it contains error message
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe(expectedError);
+  
+  // Verify toast appears
+  const toast = page.locator('.toast');
+  await expect(toast).toBeVisible();
+  await expect(toast).toContainText('Copied to clipboard!');
 }); 
