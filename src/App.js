@@ -49,18 +49,18 @@ function App() {
 
     try {
       const lines = input.split('\n');
-      
+
       // Track quotes and brackets
       let stack = [];
       let inString = null; // tracks current string quote type (' or ")
-      
+
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         for (let j = 0; j < line.length; j++) {
           const char = line[j];
-          
+
           // Handle string detection
-          if ((char === '"' || char === "'") && 
+          if ((char === '"' || char === "'") &&
               (j === 0 || line[j-1] !== '\\')) {
             if (!inString) {
               inString = char;
@@ -77,25 +77,25 @@ function App() {
             }
             continue;
           }
-          
+
           // Skip other characters if we're in a string
           if (inString) continue;
-          
+
           // Track brackets and braces
           if (char === '{' || char === '[') {
             stack.push({ type: 'bracket', char, line: i, pos: j });
           } else if (char === '}' || char === ']') {
             const last = stack.length ? stack.pop() : null;
             const lastChar = last ? last.char : null;
-            if (!last || 
-                (char === '}' && lastChar !== '{') || 
+            if (!last ||
+                (char === '}' && lastChar !== '{') ||
                 (char === ']' && lastChar !== '[')) {
               errorLine = i;
               errorChar = j;
               throw new Error(`Unmatched closing ${char === '}' ? 'brace' : 'bracket'}`);
             }
           }
-          
+
           // Check for invalid quote pairs
           if (char === ':') {
             let beforeColon = '';
@@ -117,7 +117,7 @@ function App() {
           }
         }
       }
-      
+
       // Check for unclosed elements
       if (stack.length > 0) {
         const last = stack[stack.length - 1];
@@ -162,17 +162,17 @@ function App() {
     const lines = input.split('\n');
     const errorLine = lineNum >= 0 ? lineNum : 0;
     const errorChar = charNum >= 0 ? charNum : 0;
-    
+
     let errorDisplay = 'Syntax Error: ' + message + '\n\n';
-    
+
     const start = Math.max(0, errorLine - 3);
     const end = Math.min(lines.length, errorLine + 4);
-    
+
     for (let i = start; i < end; i++) {
       const lineNumber = String(i + 1).padStart(4, ' ');
       const lineContent = lines[i];
       errorDisplay += `${lineNumber} | ${lineContent}\n`;
-      
+
       if (i === errorLine) {
         // Calculate exact position for the caret
         const caretPos = lineContent.slice(0, errorChar).length;
@@ -180,7 +180,7 @@ function App() {
         errorDisplay += '     | ' + ' '.repeat(caretPos) + message + '\n';
       }
     }
-    
+
     return errorDisplay;
   };
 
@@ -261,9 +261,20 @@ function App() {
         {(!isMobile || activeTab === 'output') && (
           <div className="output">
             <h2>JSON Output</h2>
-            <pre ref={outputRef} className="output-content">
-              {output || (error && <code className="error">{error}</code>)}
-            </pre>
+            <div className="editor-container">
+              <div className="line-numbers">
+                {(output || error || '').split('\n').map((_, i) => (
+                  <div key={i} className="line-number">{i + 1}</div>
+                ))}
+              </div>
+              <textarea
+                ref={outputRef}
+                className="output-content"
+                value={output || (error && `Error: ${error}`)}
+                readOnly
+                spellCheck="false"
+              />
+            </div>
             <div className="actions">
               <button onClick={handleCopy}>Copy to Clipboard</button>
             </div>
@@ -277,4 +288,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
