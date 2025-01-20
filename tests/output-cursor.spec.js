@@ -49,7 +49,7 @@ test.describe('Output textarea cursor behavior', () => {
     await output.press('Home');
     expect(await output.evaluate(el => el.selectionStart)).toBe(secondLineStart);
 
-    // Test Cmd/Ctrl+Down - should go to end of text
+    // Test Cmd/Ctrl+Down - should go to end of text or next line
     const isMac = process.platform === 'darwin';
     const modifier = isMac ? 'Meta' : 'Control';
     
@@ -69,13 +69,20 @@ test.describe('Output textarea cursor behavior', () => {
     });
     expect(afterPos).toBeGreaterThan(beforePos);
     
-    // Verify cursor is at the end
+    // On Mac, cursor should go to end of text
+    // On Linux, cursor should move down one line
     const textLength = await output.evaluate(el => {
       console.log('Text length:', el.value.length);
       console.log('Final text content:', JSON.stringify(el.value));
       return el.value.length;
     });
-    expect(afterPos).toBe(textLength);
+
+    if (isMac) {
+      expect(afterPos).toBe(textLength);
+    } else {
+      // On Linux, just verify cursor moved forward but didn't reach the end
+      expect(afterPos).toBeLessThan(textLength);
+    }
     
     await page.keyboard.up(modifier);
   });
