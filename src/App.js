@@ -4,7 +4,12 @@ import OutputSection from './components/OutputSection';
 import TabSelector from './components/TabSelector';
 import Toast from './components/Toast';
 import { convertToJson } from './utils/converter';
-import './App.css';
+import './styles/variables.css';
+import './styles/layout.css';
+import './styles/editor.css';
+import './styles/toolbar.css';
+import './styles/components.css';
+import './styles/responsive.css';
 
 function App() {
   const [input, setInput] = useState('');

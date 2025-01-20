@@ -1,0 +1,86 @@
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 8px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  background: #f4f4f4;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: var(--font-family);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.tabs button.active {
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--tooltip-bg) transparent;
+}
+
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--success-bg);
+  color: var(--success-text);
+  padding: 12px 16px;
+  border-radius: 4px;
+  z-index: 10000;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-family);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.toast::before {
+  content: '✓';
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.full-screen-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background: #f4f4f4;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+} 
