@@ -21,8 +21,32 @@ test('App loads and displays content', async ({ page }) => {
     expectedOutput: '{\n  "name": "John",\n  "age": 30\n}',
   },
   {
-    input: "{'city': 'New York', 'country': 'USA'}",
+    input: "{'city': 'New York', \"country\": 'USA'}",
     expectedOutput: '{\n  "city": "New York",\n  "country": "USA"\n}',
+  },
+  {
+    input: "{'city': 'New York', 'country': 'USA',}",
+    expectedOutput: '{\n  "city": "New York",\n  "country": "USA"\n}',
+  },
+  {
+    input: "{'city': 'New York', 'country': 'USA', 'country': 'Canada'}",
+    expectedOutput: '{\n  "city": "New York",\n  "country": "Canada"\n}', // last entry wins
+  },
+  {
+    input: "{'is_cool': True}",
+    expectedOutput: '{\n  "is_cool": true\n}',
+  },
+  {
+    input: "{'is_cool': False}",
+    expectedOutput: '{\n  "is_cool": false\n}',
+  },
+  {
+    input: "{'data': None}",
+    expectedOutput: '{\n  "data": null\n}',
+  },
+  {
+    input: "{'status': True, 'message': None, 'error': False}",
+    expectedOutput: '{\n  "status": true,\n  "message": null,\n  "error": false\n}',
   },
   // Add more test cases as needed
 ].forEach(({ input, expectedOutput }) => {
