@@ -1,9 +1,13 @@
 import React from 'react';
+import Toolbar from './Toolbar';
 
 function InputSection({ input, setInput, handleFileUpload }) {
   return (
     <div className="input">
-      <h2>Python Dictionary</h2>
+      <div className="section-header">
+        <h2>Python Dictionary</h2>
+        <Toolbar onFileUpload={handleFileUpload} />
+      </div>
       <div className="editor-container">
         <div className="line-numbers">
           {input.split('\n').map((_, i) => (
@@ -16,16 +20,6 @@ function InputSection({ input, setInput, handleFileUpload }) {
           placeholder="Enter Python dictionary"
           wrap="soft"
           spellCheck="false"
-        />
-      </div>
-      <div className="actions">
-        <label htmlFor="file-upload" className="file-upload-label">
-          Upload File
-        </label>
-        <input
-          id="file-upload"
-          type="file"
-          onChange={handleFileUpload}
         />
       </div>
     </div>
