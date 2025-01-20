@@ -1,3 +1,14 @@
+const PYTHON_TO_JSON = {
+  'True': 'true',
+  'False': 'false',
+  'None': 'null',
+};
+
+const preprocessPythonInput = (input) => {
+  // Replace Python keywords with JSON equivalents, but only when they're not part of other words
+  return input.replace(/\b(True|False|None)\b/g, match => PYTHON_TO_JSON[match]);
+};
+
 export const convertToJson = (input) => {
   if (input.trim() === '') {
     return { output: '', error: '' };
@@ -87,7 +98,9 @@ export const convertToJson = (input) => {
     }
 
     try {
-      const json = JSON.stringify(eval(`(${input})`), null, 2);
+      // Preprocess the input to handle Python keywords before evaluation
+      const processedInput = preprocessPythonInput(input);
+      const json = JSON.stringify(eval(`(${processedInput})`), null, 2);
       return { output: json, error: '' };
     } catch (err) {
       const match = err.message.match(/at position (\d+)/);
