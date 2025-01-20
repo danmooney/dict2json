@@ -46,7 +46,7 @@
 .input,
 .output {
   flex: 1;
-  padding: 10px;
+  padding: 20px;
 }
 
 textarea,
@@ -95,6 +95,7 @@ pre {
   background: #f8f9fa;
   border: 1px solid #dee2e6;
   border-radius: 4px;
+  margin-top: 0;
 }
 
 .line-numbers {
@@ -181,5 +182,79 @@ textarea:focus + .line-numbers .line-number.current {
   }
   to {
     opacity: 0;
+  }
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+}
+
+.toolbar-button {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.toolbar-button:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Hide tooltips on mobile */
+@media (max-width: 600px) {
+  .toolbar-button[title]:hover::after {
+    display: none;
+  }
+}
+
+/* Show tooltips on desktop */
+@media (min-width: 601px) {
+  .toolbar-button[title] {
+    position: relative;
+  }
+
+  .toolbar-button[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background-color: #333;
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+  }
+
+  .toolbar-button[title]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
   }
 } 
