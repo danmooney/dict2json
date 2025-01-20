@@ -10,14 +10,24 @@ test.describe('Output textarea cursor behavior', () => {
   });
 
   test('allows navigation keys with multi-line awareness', async ({page}) => {
+    page.on('console', msg => console.log(msg.text()));
+
     const output = page.locator('.output-content');
     await output.focus();
-    
+
+    // Log initial text content and formatting
+    const initialText = await output.evaluate(el => {
+      console.log('Initial text content:', JSON.stringify(el.value));
+      console.log('Lines:', el.value.split('\n').map(line => JSON.stringify(line)));
+      return el.value;
+    });
+
     // Set cursor to start of second line
     await output.evaluate(el => {
       const lines = el.value.split('\n');
       const firstLineLength = lines[0].length;
       el.setSelectionRange(firstLineLength + 1, firstLineLength + 1);
+      console.log('First line length:', firstLineLength);
     });
 
     // Verify we're on the second line
@@ -44,17 +54,27 @@ test.describe('Output textarea cursor behavior', () => {
     const modifier = isMac ? 'Meta' : 'Control';
     
     // Store position before the shortcut
-    const beforePos = await output.evaluate(el => el.selectionStart);
+    const beforePos = await output.evaluate(el => {
+      console.log('Before position:', el.selectionStart);
+      return el.selectionStart;
+    });
     
     await page.keyboard.down(modifier);
     await output.press('ArrowDown');
     
     // Verify cursor moved to a later position
-    const afterPos = await output.evaluate(el => el.selectionStart);
+    const afterPos = await output.evaluate(el => {
+      console.log('After position:', el.selectionStart);
+      return el.selectionStart;
+    });
     expect(afterPos).toBeGreaterThan(beforePos);
     
     // Verify cursor is at the end
-    const textLength = await output.evaluate(el => el.value.length);
+    const textLength = await output.evaluate(el => {
+      console.log('Text length:', el.value.length);
+      console.log('Final text content:', JSON.stringify(el.value));
+      return el.value.length;
+    });
     expect(afterPos).toBe(textLength);
     
     await page.keyboard.up(modifier);
