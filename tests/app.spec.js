@@ -180,7 +180,7 @@ test('Copy to clipboard functionality works', async ({ page, context }) => {
   // Verify toast appears
   const toast = page.locator('.toast');
   await expect(toast).toBeVisible();
-  await expect(toast).toContainText('Copied successfully');
+  await expect(toast).toContainText('Copied to clipboard!');
 });
 
 test('Copy to clipboard works in mobile view', async ({ page, context }) => {
@@ -208,6 +208,6 @@ test('Copy to clipboard works in mobile view', async ({ page, context }) => {
   // Verify toast appears
   const toast = page.locator('.toast');
   await expect(toast).toBeVisible();
-  await expect(toast).toContainText('Copied successfully');
+  await expect(toast).toContainText('Copied to clipboard!');
 });
 
