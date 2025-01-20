@@ -23,6 +23,12 @@ function OutputSection({ output, error, handleCopy }) {
       'Tab', 'Shift', 'Control', 'Alt', 'Meta'
     ];
 
+    // Store current selection before any changes
+    const currentSelection = {
+      start: e.target.selectionStart,
+      end: e.target.selectionEnd
+    };
+
     // If it's a navigation key, allow it
     if (navigationKeys.includes(e.key)) {
       return;
@@ -31,14 +37,14 @@ function OutputSection({ output, error, handleCopy }) {
     // For any other key, require Ctrl/Cmd modifier
     if (!e.ctrlKey && !e.metaKey) {
       e.preventDefault();
-      e.target.setSelectionRange(cursorPosition.start, cursorPosition.end);
+      e.target.setSelectionRange(currentSelection.start, currentSelection.end);
       return;
     }
 
     // If we get here, we have Ctrl/Cmd pressed. Only allow specific keys
     if (!['c', 'v', 'x', 'a'].includes(e.key)) {
       e.preventDefault();
-      e.target.setSelectionRange(cursorPosition.start, cursorPosition.end);
+      e.target.setSelectionRange(currentSelection.start, currentSelection.end);
     }
   };
 

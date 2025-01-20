@@ -91,36 +91,56 @@ test.describe('Output textarea cursor behavior', () => {
   test('maintains selection during blocked keypresses', async ({page}) => {
     const output = page.locator('.output-content');
     
-    // Select a portion of text
+    // Wait for output to be populated and focused
+    await expect(output).toHaveValue(/\{[\s\S]*\}/);
     await output.focus();
-    await page.keyboard.down('Shift');
-    await output.press('ArrowRight');
-    await output.press('ArrowRight');
-    await output.press('ArrowRight');
-    await page.keyboard.up('Shift');
+    await page.waitForTimeout(100); // Give the focus time to settle
 
+    // Create a small selection at the start
+    await output.evaluate(el => {
+      // Force selection of first few characters
+      el.focus();
+      el.setSelectionRange(0, 5);
+    });
+
+    // Verify initial selection
     const initialStart = await output.evaluate(el => el.selectionStart);
     const initialEnd = await output.evaluate(el => el.selectionEnd);
-    expect(initialStart).toBeLessThan(initialEnd); // Verify we have a selection
+    expect(initialStart).toBe(0);
+    expect(initialEnd).toBe(5);
 
     // Try typing - should maintain selection
     await output.press('a');
     expect(await output.evaluate(el => el.selectionStart)).toBe(initialStart);
     expect(await output.evaluate(el => el.selectionEnd)).toBe(initialEnd);
+
+    // Try typing another character - selection should still be maintained
+    await output.press('b');
+    expect(await output.evaluate(el => el.selectionStart)).toBe(initialStart);
+    expect(await output.evaluate(el => el.selectionEnd)).toBe(initialEnd);
+
+    // Verify the text wasn't modified
+    const finalText = await output.evaluate(el => el.value);
+    expect(finalText).not.toContain('a');
+    expect(finalText).not.toContain('b');
   });
 
   test('blocks all non-navigation keys without modifier', async ({page}) => {
     const output = page.locator('.output-content');
     await output.click();
     const initialPos = await output.evaluate(el => el.selectionStart);
+    const initialText = await output.evaluate(el => el.value);
 
-    // Test various keys
-    const keysToTest = ['a', 'b', '1', '2', 'Space', '[', ']', '-', '=', ';'];
+    // Test various keys that won't be in the JSON output
+    const keysToTest = ['q', 'w', '@', '#', 'Space', '?', '>', '<', '~', '|'];
     
     for (const key of keysToTest) {
       await output.press(key);
       expect(await output.evaluate(el => el.selectionStart)).toBe(initialPos);
-      expect(await output.evaluate(el => el.value)).not.toContain(key);
+      
+      // Verify the text hasn't changed
+      const currentText = await output.evaluate(el => el.value);
+      expect(currentText).toBe(initialText);
     }
   });
 });
