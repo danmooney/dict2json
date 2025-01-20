@@ -39,13 +39,24 @@ test.describe('Output textarea cursor behavior', () => {
     await output.press('Home');
     expect(await output.evaluate(el => el.selectionStart)).toBe(secondLineStart);
 
-    // Test Cmd+Down - should go to end of entire text
+    // Test Cmd/Ctrl+Down - should go to end of text
     const isMac = process.platform === 'darwin';
     const modifier = isMac ? 'Meta' : 'Control';
+    
+    // Store position before the shortcut
+    const beforePos = await output.evaluate(el => el.selectionStart);
+    
     await page.keyboard.down(modifier);
     await output.press('ArrowDown');
+    
+    // Verify cursor moved to a later position
+    const afterPos = await output.evaluate(el => el.selectionStart);
+    expect(afterPos).toBeGreaterThan(beforePos);
+    
+    // Verify cursor is at the end
     const textLength = await output.evaluate(el => el.value.length);
-    expect(await output.evaluate(el => el.selectionStart)).toBe(textLength);
+    expect(afterPos).toBe(textLength);
+    
     await page.keyboard.up(modifier);
   });
 
