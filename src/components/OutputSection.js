@@ -18,7 +18,7 @@ function OutputSection({ output, error, handleCopy }) {
         <h2>JSON Output</h2>
         <Toolbar onCopy={handleCopy} isOutput={true} />
       </div>
-      <div 
+      <div
         className={`editor-container ${isFocused ? 'focused' : ''}`}
         style={{
           '--current-line': currentLine,
