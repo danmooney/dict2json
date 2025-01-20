@@ -144,6 +144,7 @@ pre {
   border: 1px solid #dee2e6;
   border-radius: 0 0 4px 4px;
   margin-top: 0;
+  z-index: 1;
 }
 
 .editor-header {
@@ -154,6 +155,8 @@ pre {
   border: 1px solid #dee2e6;
   border-bottom: none;
   border-radius: 4px 4px 0 0;
+  position: relative;
+  z-index: 4;
 }
 
 .line-numbers {
@@ -220,7 +223,7 @@ textarea {
   padding-top: 10px;
   padding-bottom: 10px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .output-content {
@@ -334,45 +337,6 @@ textarea {
   }
 }
 
-.toolbar-button {
-  position: relative;
-}
-
-.tooltip {
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 4px 8px;
-  background-color: var(--tooltip-bg);
-  color: var(--tooltip-text);
-  border-radius: 4px;
-  font-size: 13px;
-  font-family: var(--font-family);
-  font-weight: 500;
-  white-space: nowrap;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.tooltip::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent var(--tooltip-bg) transparent;
-}
-
-/* Hide tooltips on mobile */
-@media (max-width: 600px) {
-  .tooltip {
-    display: none;
-  }
-}
-
 .validation-icon {
   display: flex;
   align-items: center;
@@ -383,6 +347,7 @@ textarea {
   width: 24px;
   height: 24px;
   margin: -2px 0;
+  z-index: 3;
 }
 
 .validation-icon svg {

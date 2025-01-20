@@ -95,4 +95,33 @@ test('Validation icon in mobile view', async ({page}) => {
   // Clear and verify icon disappears
   await page.fill('textarea', '');
   await checkValidationIcon(false);
+});
+
+test('Validation tooltip appears above other elements', async ({page}) => {
+  await page.goto('http://localhost:3000');
+
+  // Add some input to show validation icon
+  await page.fill('textarea', "{'test': True}");
+  await page.waitForTimeout(100);
+
+  // Hover over validation icon
+  const validationIcon = page.locator('.validation-icon');
+  await validationIcon.hover();
+
+  // Get tooltip element
+  const tooltip = page.getByTestId('validation-tooltip');
+  
+  // Verify tooltip is visible
+  await expect(tooltip).toBeVisible();
+
+  // Try to click the tooltip - this will fail if it's behind other elements
+  await tooltip.click();
+
+  // Additional check - verify tooltip is still visible after click
+  // This confirms the click wasn't intercepted by elements above it
+  await expect(tooltip).toBeVisible();
+  
+  // Verify we can still hover the icon after clicking tooltip
+  await validationIcon.hover();
+  await expect(tooltip).toBeVisible();
 }); 
