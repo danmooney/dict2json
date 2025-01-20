@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Toolbar from './Toolbar';
 
-function InputSection({ input, setInput, handleFileUpload }) {
+function InputSection({ input, setInput, handleFileUpload, error }) {
   const [currentLine, setCurrentLine] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -18,7 +18,7 @@ function InputSection({ input, setInput, handleFileUpload }) {
         <h2>Python Dictionary</h2>
       </div>
       <div className="editor-header">
-        <Toolbar onFileUpload={handleFileUpload} />
+        <Toolbar onFileUpload={handleFileUpload} hasInput={input.trim().length > 0} error={error} />
       </div>
       <div 
         className={`editor-container ${isFocused ? 'focused' : ''}`}

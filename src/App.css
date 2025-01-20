@@ -271,6 +271,8 @@ textarea {
 .toolbar {
   display: flex;
   gap: 8px;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .toolbar-button {
@@ -369,4 +371,50 @@ textarea {
   .tooltip {
     display: none;
   }
+}
+
+.validation-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 50%;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin: -2px 0;
+}
+
+.validation-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.5px;
+}
+
+.validation-icon.valid {
+  background-color: #059669;
+  color: white;
+}
+
+.validation-icon.error {
+  background-color: #dc2626;
+  color: white;
+}
+
+.validation-icon:hover {
+  opacity: 0.9;
+}
+
+/* Add transition for smooth color changes */
+.validation-icon {
+  transition: all 0.2s ease;
+}
+
+/* Adjust the hover effect */
+.validation-icon.valid:hover {
+  background-color: #047857;
+}
+
+.validation-icon.error:hover {
+  background-color: #b91c1c;
 } 
