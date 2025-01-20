@@ -4,6 +4,8 @@
   --font-mono: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   --tooltip-bg: #2d3748;
   --tooltip-text: #ffffff;
+  --success-bg: #059669;
+  --success-text: #ffffff;
 }
 
 .app {
@@ -200,36 +202,26 @@ textarea:focus + .line-numbers .line-number.current {
 .toast {
   position: fixed;
   top: 20px;
-  right: 20px;
-  background: var(--tooltip-bg);
-  color: var(--tooltip-text);
-  padding: 12px 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--success-bg);
+  color: var(--success-text);
+  padding: 12px 16px;
   border-radius: 4px;
   z-index: 10000;
-  animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   font-family: var(--font-family);
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+.toast::before {
+  content: '✓';
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .section-header {
