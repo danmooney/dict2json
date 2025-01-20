@@ -35,3 +35,5 @@ jspm_packages/
 # App-specific files
 starting_files/
 test-results/
+public/*
+!public/.gitkeep
