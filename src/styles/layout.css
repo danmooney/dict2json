@@ -1,0 +1,49 @@
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: var(--font-family);
+}
+
+.app.full-screen {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: white;
+}
+
+.converter {
+  display: flex;
+}
+
+.converter.mobile {
+  flex-direction: column;
+}
+
+.input,
+.output {
+  flex: 1;
+  padding: 20px;
+}
+
+.section-header {
+  margin-bottom: 10px;
+}
+
+.section-header h2 {
+  margin: 0 0 8px 0;
+}
+
+h1 {
+  text-align: center;
+  margin: 0 0 32px;
+  color: var(--tooltip-bg);
+  font-size: 28px;
+  font-weight: 600;
+} 
