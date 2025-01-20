@@ -262,3 +262,166 @@ test('File upload works in mobile view', async ({ page }) => {
   await expect(page.locator('.output-content')).toHaveValue(expectedOutput);
 });
 
+test('Line highlighting works in desktop view', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  // Enter multi-line text
+  const testInput = "{'key1': 'value1',\n'key2': 'value2',\n'key3': 'value3'}";
+  await page.fill('textarea', testInput);
+
+  // Focus input and get initial line offset
+  const inputTextarea = page.locator('.input textarea');
+  await inputTextarea.focus();
+  await inputTextarea.evaluate((el) => {
+    el.setSelectionRange(0, 0);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  
+  const container = page.locator('.input .editor-container');
+  await expect(container).toHaveClass(/focused/);
+  
+  // Get initial line offset
+  const initialStyle = await container.getAttribute('style');
+  const initialOffset = parseInt(initialStyle.match(/--line-offset: (\d+)px/)[1]);
+  
+  // Move to first line and verify offset equals initial offset
+  await inputTextarea.evaluate((el) => {
+    el.setSelectionRange(22, 22);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  
+  await page.waitForTimeout(100);
+
+  // Verify the highlight position through the style attribute
+  const style = await container.getAttribute('style');
+  const lineOffset = parseInt(style.match(/--line-offset: (\d+)px/)[1]);
+  expect(style).toContain('--current-line: 0');
+  expect(lineOffset).toBe(initialOffset); // First line should equal initial offset
+
+  // Verify highlight disappears when unfocused
+  await page.click('h1'); // Click away to blur
+  await expect(container).not.toHaveClass(/focused/);
+});
+
+test('Line highlighting works in output section', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  // Enter multi-line text
+  const testInput = "{'key1': 'value1',\n'key2': 'value2',\n'key3': 'value3'}";
+  await page.fill('textarea', testInput);
+
+  // Get initial line offset
+  const outputTextarea = page.locator('.output textarea');
+  await outputTextarea.focus();
+  await outputTextarea.evaluate((el) => {
+    el.setSelectionRange(0, 0);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  
+  const container = page.locator('.output .editor-container');
+  await expect(container).toHaveClass(/focused/);
+  
+  const initialStyle = await container.getAttribute('style');
+  const initialOffset = parseInt(initialStyle.match(/--line-offset: (\d+)px/)[1]);
+  
+  // Move to first line and verify offset stays the same
+  await outputTextarea.evaluate((el) => {
+    el.setSelectionRange(20, 20);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  
+  await page.waitForTimeout(100);
+
+  // Verify the highlight position through the style attribute
+  const style = await container.getAttribute('style');
+  const lineOffset = parseInt(style.match(/--line-offset: (\d+)px/)[1]);
+  expect(style).toContain('--current-line: 0');
+  expect(lineOffset).toBe(initialOffset);
+});
+
+test('Line highlighting works in mobile view', async ({ page }) => {
+  // Set mobile viewport
+  await page.setViewportSize({ width: 500, height: 800 });
+  await page.goto('http://localhost:3000');
+
+  // Enter multi-line text
+  const testInput = "{'key1': 'value1',\n'key2': 'value2'}";
+  await page.fill('textarea', testInput);
+
+  // Get initial line offset
+  const inputTextarea = page.locator('.input textarea');
+  await inputTextarea.focus();
+  await inputTextarea.evaluate((el) => {
+    el.setSelectionRange(0, 0);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  
+  const inputContainer = page.locator('.input .editor-container');
+  const initialStyle = await inputContainer.getAttribute('style');
+  const initialOffset = parseInt(initialStyle.match(/--line-offset: (\d+)px/)[1]);
+  
+  // Move to first line and verify offset equals initial offset
+  await inputTextarea.evaluate((el) => {
+    el.setSelectionRange(20, 20);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  await page.waitForTimeout(100);
+  await expect(inputContainer).toHaveClass(/focused/);
+  
+  const inputStyle = await inputContainer.getAttribute('style');
+  const lineOffset = parseInt(inputStyle.match(/--line-offset: (\d+)px/)[1]);
+  expect(inputStyle).toContain('--current-line: 0');
+  expect(lineOffset).toBe(initialOffset);
+});
+
+test('Line highlighting moves correctly between lines', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  // Enter multi-line text
+  const testInput = "{'key1': 'value1',\n'key2': 'value2',\n'key3': 'value3'}";
+  await page.fill('textarea', testInput);
+
+  const inputTextarea = page.locator('.input textarea');
+  await inputTextarea.focus();
+
+  // Get initial line offset
+  await inputTextarea.evaluate((el) => {
+    el.setSelectionRange(0, 0);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  
+  const container = page.locator('.input .editor-container');
+  const initialStyle = await container.getAttribute('style');
+  const initialOffset = parseInt(initialStyle.match(/--line-offset: (\d+)px/)[1]);
+
+  // Test line 0
+  await inputTextarea.evaluate((el) => {
+    el.setSelectionRange(5, 5);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  await page.waitForTimeout(100);
+  let style = await container.getAttribute('style');
+  expect(style).toContain('--current-line: 0');
+  expect(parseInt(style.match(/--line-offset: (\d+)px/)[1])).toBe(initialOffset);
+
+  // Test line 1
+  await inputTextarea.evaluate((el) => {
+    el.setSelectionRange(25, 25);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  await page.waitForTimeout(100);
+  style = await container.getAttribute('style');
+  expect(style).toContain('--current-line: 1');
+  expect(parseInt(style.match(/--line-offset: (\d+)px/)[1])).toBe(initialOffset + 24);
+
+  // Test line 2
+  await inputTextarea.evaluate((el) => {
+    el.setSelectionRange(45, 45);
+    el.dispatchEvent(new Event('keyup'));
+  });
+  await page.waitForTimeout(100);
+  style = await container.getAttribute('style');
+  expect(style).toContain('--current-line: 2');
+  expect(parseInt(style.match(/--line-offset: (\d+)px/)[1])).toBe(initialOffset + 48);
+});
+
