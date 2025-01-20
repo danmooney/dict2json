@@ -139,6 +139,10 @@ test('Tooltips are visible on hover in desktop view and hidden in mobile', async
     input: "{'data': {'a': \"{'b': 'c'}\"}}",
     expectedOutput: '{\n  "data": {\n    "a": "{\'b\': \'c\'}"\n  }\n}',
   },
+  {
+    input: `\n\n    {'data': {'nested': {"stuff": "{in quotes ' \\" the raven }"}}}    \n\n`,
+    expectedOutput: '{\n  "data": {\n    "nested": {\n      "stuff": "{in quotes \' \\" the raven }"\n    }\n  }\n}',
+  },
   // Add more test cases as needed
 ].forEach(({ input, expectedOutput }) => {
   test(`Converting Python dict to JSON with input: ${input}`, async ({ page }) => {
@@ -156,7 +160,7 @@ test('Tooltips are visible on hover in desktop view and hidden in mobile', async
   });
 });
 
-test('Copy to clipboard functionality works', async ({ page, context }) => {
+test('Copy to clipboard functionality works', async ({ page }) => {
   await page.goto('http://localhost:3000');
 
   // Enter some test data
@@ -183,7 +187,7 @@ test('Copy to clipboard functionality works', async ({ page, context }) => {
   await expect(toast).toContainText('Copied to clipboard!');
 });
 
-test('Copy to clipboard works in mobile view', async ({ page, context }) => {
+test('Copy to clipboard works in mobile view', async ({ page }) => {
   // Set mobile viewport
   await page.setViewportSize({ width: 500, height: 800 });
   await page.goto('http://localhost:3000');
