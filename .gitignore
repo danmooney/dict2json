@@ -38,3 +38,4 @@ test-results/
 public/*
 !public/.gitkeep
 !public/index.html
+!public/favicon.svg
