@@ -10,14 +10,24 @@ const preprocessPythonInput = (input) => {
 };
 
 export const convertToJson = (input) => {
-  if (input.trim() === '') {
-    return { output: '', error: '' };
+  // Skip empty input
+  if (!input.trim()) {
+    return { output: '', error: null };
   }
 
-  let errorLine = -1;
-  let errorChar = -1;
-
   try {
+    // Basic validation for dictionary-like structure
+    const trimmedInput = input.trim();
+    if (!trimmedInput.startsWith('{') || !trimmedInput.endsWith('}')) {
+      return {
+        output: null,
+        error: 'Invalid Python dictionary format - must start with { and end with }'
+      };
+    }
+
+    let errorLine = -1;
+    let errorChar = -1;
+
     const lines = input.split('\n');
     let stack = [];
     let inString = null;
@@ -118,9 +128,11 @@ export const convertToJson = (input) => {
       }
       throw new Error(`Invalid Python dictionary syntax: ${err.message}`);
     }
-  } catch (err) {
-    const errorMessage = formatError(input, err.message, errorLine, errorChar);
-    return { output: '', error: errorMessage };
+  } catch (error) {
+    return {
+      output: null,
+      error: `Invalid Python dictionary format - ${error.message}`
+    };
   }
 };
 
