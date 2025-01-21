@@ -88,9 +88,9 @@ function App() {
         )}
       </div>
       
-      <button className="full-screen-btn" onClick={toggleFullScreen}>
-        {isFullScreen ? 'Exit Full Screen' : 'Full Screen'}
-      </button>
+      {/*<button className="full-screen-btn" onClick={toggleFullScreen}>*/}
+      {/*  {isFullScreen ? 'Exit Full Screen' : 'Full Screen'}*/}
+      {/*</button>*/}
     </div>
   );
 }
