@@ -44,8 +44,16 @@
 
 h1 {
   text-align: center;
-  margin: 0 0 32px;
+  margin: 0 0 8px;
   color: var(--tooltip-bg);
   font-size: 28px;
   font-weight: 600;
+}
+
+.subheading {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  margin: 0 0 32px;
+  font-weight: normal;
 } 

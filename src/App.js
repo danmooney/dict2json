@@ -44,7 +44,7 @@ function App() {
   }, [showToast]);
 
   const handleCopy = () => {
-    const contentToCopy = error ? `Error: ${error}` : output;
+    const contentToCopy = error || output;
     navigator.clipboard.writeText(contentToCopy);
     setShowToast(true);
   };
@@ -63,6 +63,7 @@ function App() {
   return (
     <div className={`app ${isFullScreen ? 'full-screen' : ''}`}>
       <h1>Python Dict to JSON Converter</h1>
+      <p className="subheading">Paste your Python dictionary to convert it to valid JSON format instantly</p>
       <Toast show={showToast} />
       
       {isMobile && (
