@@ -72,7 +72,7 @@ function OutputSection({ output, error, handleCopy }) {
         </div>
         <textarea
           className="output-content"
-          value={output || (error && `Error: ${error}`)}
+          value={output || error}
           spellCheck="false"
           onKeyDown={handleKeyDown}
           onClick={handleCursorMove}

@@ -58,6 +58,10 @@ import { test, expect } from '@playwright/test';
   }
 }`
   },
+  {
+    input: `{"a": (True)}`,
+    expectedOutput: '{\n  "a": true\n}',
+  },
 ].forEach(({ input, expectedOutput }) => {
   test(`Converting Python dict to JSON with input: ${input}`, async ({ page }) => {
     await page.goto('http://localhost:3000');
