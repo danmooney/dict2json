@@ -19,9 +19,9 @@ test('App loads and displays content', async ({ page }) => {
   const outputBox = await page.locator('.output').boundingBox();
   const viewport = page.viewportSize();
 
-  // Expect sections to take up at least 25% of viewport width each
-  // Combined with gap this ensures they fill the 60% container appropriately
-  expect(inputBox.width).toBeGreaterThan(viewport.width * 0.25);
-  expect(outputBox.width).toBeGreaterThan(viewport.width * 0.25);
+  // Expect sections to take up at least 35% of viewport width each
+  // Combined with gap this ensures they fill the 80% container appropriately
+  expect(inputBox.width).toBeGreaterThan(viewport.width * 0.35);
+  expect(outputBox.width).toBeGreaterThan(viewport.width * 0.35);
 });
 
