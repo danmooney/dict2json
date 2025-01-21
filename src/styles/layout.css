@@ -1,5 +1,5 @@
 .app {
-  max-width: 800px;
+  max-width: 60%;
   margin: 0 auto;
   padding: 20px;
   font-family: var(--font-family);
@@ -20,6 +20,7 @@
 
 .converter {
   display: flex;
+  gap: 20px;
 }
 
 .converter.mobile {
@@ -30,6 +31,7 @@
 .output {
   flex: 1;
   padding: 20px;
+  min-width: 40%;
 }
 
 .section-header {
