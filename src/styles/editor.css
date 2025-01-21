@@ -41,6 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  min-width: 20px;
 }
 
 textarea {
@@ -53,17 +54,18 @@ textarea {
   border: none;
   resize: vertical;
   background: transparent;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  white-space: pre;
+  word-wrap: normal;
   outline: none;
-  padding-top: 10px;
-  padding-bottom: 10px;
   position: relative;
   z-index: 2;
+  overflow-x: auto;
 }
 
 .output-content {
   background-color: transparent !important;
+  white-space: pre !important;
+  overflow-x: auto !important;
 }
 
 .output textarea {
