@@ -1,8 +1,8 @@
 # Node modules
-node_modules/
+node_modules
 
 # Webpack build directory
-build/
+dist
 
 # Logs
 logs/
@@ -34,3 +34,8 @@ jspm_packages/
 
 # App-specific files
 starting_files/
+test-results/
+public/*
+!public/.gitkeep
+!public/index.html
+!public/favicon.svg

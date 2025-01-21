@@ -1,0 +1,75 @@
+.toolbar {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.toolbar-button {
+  background: none;
+  border: none;
+  padding: 3px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.toolbar-button:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.toolbar-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.validation-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border-radius: 50%;
+  position: relative;
+  width: 22px;
+  height: 22px;
+  margin: -2px 0;
+  z-index: 3;
+}
+
+.validation-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 3px;
+}
+
+.validation-icon.valid {
+  background-color: #059669;
+  color: white;
+}
+
+.validation-icon.error {
+  background-color: #dc2626;
+  color: white;
+}
+
+.validation-icon:hover {
+  opacity: 0.9;
+}
+
+.validation-icon {
+  transition: all 0.2s ease;
+}
+
+.validation-icon.valid:hover {
+  background-color: #047857;
+}
+
+.validation-icon.error:hover {
+  background-color: #b91c1c;
+} 

@@ -1,0 +1,93 @@
+.editor-container {
+  position: relative;
+  display: flex;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0 0 4px 4px;
+  margin-top: 0;
+  z-index: 1;
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: #e9ecef;
+  border: 1px solid #dee2e6;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  z-index: 4;
+}
+
+.line-numbers {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 8px;
+  background: #e9ecef;
+  border-right: 1px solid #dee2e6;
+  user-select: none;
+  text-align: right;
+  color: #6c757d;
+  position: relative;
+  z-index: 1;
+}
+
+.line-number {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 20px;
+}
+
+textarea {
+  flex: 1;
+  min-height: 300px;
+  padding: 10px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 24px;
+  border: none;
+  resize: vertical;
+  background: transparent;
+  white-space: pre;
+  word-wrap: normal;
+  outline: none;
+  position: relative;
+  z-index: 2;
+  overflow-x: auto;
+}
+
+.output-content {
+  background-color: transparent !important;
+  white-space: pre !important;
+  overflow-x: auto !important;
+}
+
+.output textarea {
+  cursor: default;
+}
+
+.editor-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: linear-gradient(transparent 0px, var(--highlight-line) 0px) no-repeat;
+  background-size: 100% 24px;
+  background-position-y: var(--line-offset);
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  z-index: 0;
+}
+
+.editor-container.focused::before {
+  opacity: 1;
+} 
