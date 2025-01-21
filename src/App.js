@@ -44,7 +44,7 @@ function App() {
   }, [showToast]);
 
   const handleCopy = () => {
-    const contentToCopy = error || output;
+    const contentToCopy = error ? `Error: ${error}` : output;
     navigator.clipboard.writeText(contentToCopy);
     setShowToast(true);
   };

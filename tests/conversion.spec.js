@@ -76,4 +76,22 @@ import { test, expect } from '@playwright/test';
     const outputJson = await page.textContent('.output-content');
     expect(outputJson).toBe(expectedOutput);
   });
+});
+
+test('Inputting a number shows error message', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  // Enter a number instead of a dictionary
+  await page.fill('textarea', '42');
+
+  // Wait for the output to be generated
+  await page.waitForSelector('.output-content');
+
+  // Check if the output contains an error message
+  const outputContent = await page.locator('.output-content').inputValue();
+  expect(outputContent).toContain('Error: Invalid Python dictionary format');
+
+  // Verify the validation icon shows error state
+  const validationIcon = page.locator('.validation-icon');
+  await expect(validationIcon).toHaveClass(/error/);
 }); 
