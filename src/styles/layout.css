@@ -5,6 +5,13 @@
   font-family: var(--font-family);
 }
 
+@media (max-width: 600px) {
+  .app {
+    max-width: 95%;
+    padding: 10px;
+  }
+}
+
 .app.full-screen {
   max-width: none;
   margin: 0;
@@ -56,4 +63,4 @@ h1 {
   font-size: 16px;
   margin: 0 0 32px;
   font-weight: normal;
-} 
+}
