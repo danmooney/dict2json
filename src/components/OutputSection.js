@@ -72,6 +72,7 @@ function OutputSection({ output, error, handleCopy }) {
         </div>
         <textarea
           className="output-content"
+          data-testid="json-output"
           value={error ? `Error: ${error}` : output}
           spellCheck="false"
           onKeyDown={handleKeyDown}
