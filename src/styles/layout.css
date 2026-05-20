@@ -172,3 +172,14 @@ footer li {
         overflow-x: auto;
     }
 }
+
+/* When 160x600 side rails are visible (viewport >= 1280px), reserve 200px on
+   each side so .content-section and footer don't slide under the ads. The
+   ad occupies 0-176px from the viewport edge; 200px gives 24px of breathing
+   room. Capped at 80% so very wide screens still look balanced. */
+@media (min-width: 1280px) {
+    .content-section,
+    footer {
+        max-width: min(80%, calc(100% - 400px));
+    }
+}
