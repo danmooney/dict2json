@@ -37,7 +37,6 @@ starting_files/
 test-results/
 public/*
 !public/.gitkeep
-!public/index.html
 !public/privacy.html
 !public/favicon.svg
 !ads.txt
