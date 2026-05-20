@@ -18,8 +18,7 @@ const IMAGE_POOLS = {
     'unisex-staple-t-shirt-black-right-front-6a0df07641fa5.png',
   ],
   '728x90': [
-    // TODO: Add horizontal banner images here when ready
-    'tshirt-728x90.png',
+    'horizontal.jpg',
   ],
   '320x50': [
     // TODO: Add mobile banner images here when ready
