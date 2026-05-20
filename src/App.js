@@ -3,6 +3,7 @@ import InputSection from './components/InputSection';
 import OutputSection from './components/OutputSection';
 import TabSelector from './components/TabSelector';
 import Toast from './components/Toast';
+import TshirtAds from './components/TshirtAds';
 import { convertToJson } from './utils/converter';
 import './styles/variables.css';
 import './styles/layout.css';
@@ -10,6 +11,7 @@ import './styles/editor.css';
 import './styles/toolbar.css';
 import './styles/components.css';
 import './styles/responsive.css';
+import './styles/ads.css';
 
 function App() {
   const [input, setInput] = useState('');
@@ -65,7 +67,8 @@ function App() {
       <h1>Python Dict to JSON Converter</h1>
       <p className="subheading">Paste your Python dictionary to convert it to valid JSON format instantly</p>
       <Toast show={showToast} />
-      
+      <TshirtAds />
+
       {isMobile && (
         <TabSelector activeTab={activeTab} setActiveTab={setActiveTab} />
       )}
