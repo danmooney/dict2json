@@ -39,6 +39,11 @@ public/*
 !public/.gitkeep
 !public/privacy.html
 !public/favicon.svg
+!public/favicon.png
+!public/favicon-16x16.png
+!public/favicon-32x32.png
+!public/favicon.ico
+!public/apple-touch-icon.png
 !public/ads/
 !ads.txt
 # Local-only backups of source mockups — don't track in git
