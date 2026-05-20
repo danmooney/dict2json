@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-// TODO: Replace with your actual Fourthwall product URL
 const FOURTHWALL_URL = 'https://raisin-pains-shop.fourthwall.com/products/raisin-pains-supersoft-sycophancy-tee';
 
 const DISMISS_KEY = 'tshirt-ad-dismissed-at';
