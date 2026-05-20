@@ -21,8 +21,7 @@ const IMAGE_POOLS = {
     'horizontal.jpg',
   ],
   '320x50': [
-    // TODO: Add mobile banner images here when ready
-    'tshirt-320x50.png',
+    'horizontal-mobile.jpg',
   ],
 };
 
