@@ -1,4 +1,76 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python Dict to JSON Converter Online</title><meta name="description" content="Convert Python dictionaries to JSON format online. Paste your Python dict and get the equivalent JSON output instantly."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="shortcut icon" href="/favicon.ico"><script defer="defer" src="bundle.js"></script></head><body><div id="root"></div><main class="content-section"><section class="recommended-reading"><h2>Recommended Reading</h2><p class="affiliate-note">The links below are Amazon affiliate links. If you purchase through them, we may earn a small commission at no extra cost to you.</p><ul><li><strong><a href="https://www.amazon.com/dp/1492056359?tag=dict2json-20" target="_blank" rel="sponsored nofollow noopener">Fluent Python (2nd Edition)</a></strong> by Luciano Ramalho &mdash; The definitive guide to Python's data model. Essential reading if you work with dictionaries, classes, and idiomatic Python day-to-day.</li><li><strong><a href="https://www.amazon.com/dp/1718502702?tag=dict2json-20" target="_blank" rel="sponsored nofollow noopener">Python Crash Course (3rd Edition)</a></strong> by Eric Matthes &mdash; The most popular hands-on introduction to Python. Great for anyone newer to the language.</li><li><strong><a href="https://www.amazon.com/dp/1593279922?tag=dict2json-20" target="_blank" rel="sponsored nofollow noopener">Automate the Boring Stuff with Python (2nd Edition)</a></strong> by Al Sweigart &mdash; Practical Python for working with files, JSON, web data, and everyday automation.</li></ul></section><h2>About Python Dictionaries and JSON</h2><section><h3>What is a Python Dictionary?</h3><p>A Python dictionary is a built-in data structure that stores key-value pairs. It's one of Python's most useful and widely-used data types, allowing you to create mappings between related pieces of information. Dictionaries are defined using curly braces <code>{}</code> with key-value pairs separated by commas.</p><h4>Key Features of Python Dictionaries:</h4><ul><li>Keys must be unique and immutable (strings, numbers, or tuples)</li><li>Values can be of any type, including other dictionaries</li><li>Dictionaries are mutable and can be modified after creation</li><li>Order is preserved in Python 3.7+ (unordered in earlier versions)</li></ul><p>Learn more about Python dictionaries in the <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries" target="_blank" rel="noopener">official Python documentation</a>.</p></section><section><h3>What is JSON?</h3><p>JSON (JavaScript Object Notation) is a lightweight, text-based data interchange format that's easy for humans to read and write and easy for machines to parse and generate. It's language-independent and has become one of the most popular data formats for web APIs and configuration files.</p><h4>Key Features of JSON:</h4><ul><li>Data types: strings, numbers, booleans, null, arrays, and objects</li><li>Uses double quotes for strings and property names</li><li>No support for comments or trailing commas</li><li>Widely supported across programming languages</li></ul><p>Learn more about JSON at <a href="https://www.json.org/" target="_blank" rel="noopener">json.org</a>.</p></section><section><h3>Converting Between Python Dictionaries and JSON</h3><p>While Python dictionaries and JSON objects are similar, there are some key differences in syntax and data types:</p><table><thead><tr><th>Python</th><th>JSON</th></tr></thead><tbody><tr><td>True/False</td><td>true/false</td></tr><tr><td>None</td><td>null</td></tr><tr><td>Single or double quotes</td><td>Double quotes only</td></tr></tbody></table><p>Our converter handles these differences automatically, ensuring your Python dictionary is properly converted to valid JSON format.</p></section><section><h3>Common Use Cases</h3><ul><li>Converting configuration files between Python and JSON formats</li><li>Preparing data for REST APIs that require JSON</li><li>Debugging Python dictionary structures</li><li>Learning the differences between Python and JSON syntax</li></ul></section></main><footer><p>For more information about data structures and formats, visit:</p><ul><li><a href="https://www.python.org/doc/" target="_blank" rel="noopener">Python Documentation</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON" target="_blank" rel="noopener">MDN Web Docs - JSON</a></li></ul><p class="affiliate-disclosure"><small>As an Amazon Associate, we earn from qualifying purchases. This site may contain affiliate links; we may earn a commission at no extra cost to you.</small></p><p><small><a href="/privacy">Privacy Policy</a></small></p></footer><script async src="https://www.googletagmanager.com/gtag/js?id=G-QFE6TJB3X9"></script><script>window.dataLayer = window.dataLayer || [];
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python Dict to JSON Converter Online | dict2json</title><meta name="description" content="Free online converter for Python dictionaries to JSON. Paste a Python dict and instantly get valid JSON — handles True/False, None, single quotes, and nested structures in your browser."><link rel="canonical" href="https://dict2json.com/"><meta name="theme-color" content="#2d3748"><meta property="og:type" content="website"><meta property="og:site_name" content="dict2json"><meta property="og:title" content="Python Dict to JSON Converter Online"><meta property="og:description" content="Paste a Python dictionary, get valid JSON instantly. Handles True/False, None, and single quotes. Runs entirely in your browser."><meta property="og:url" content="https://dict2json.com/"><meta property="og:image" content="https://dict2json.com/ads/horizontal.jpg"><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Python Dict to JSON Converter Online"><meta name="twitter:description" content="Paste a Python dictionary, get valid JSON instantly. Runs entirely in your browser."><meta name="twitter:image" content="https://dict2json.com/ads/horizontal.jpg"><link rel="preconnect" href="https://www.googletagmanager.com"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="shortcut icon" href="/favicon.ico"><script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://dict2json.com/#app",
+          "name": "Python Dict to JSON Converter",
+          "url": "https://dict2json.com/",
+          "description": "Online tool that converts Python dictionaries to JSON format. Translates True/False to true/false, None to null, and single quotes to double quotes.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "browserRequirements": "Requires JavaScript",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "Convert Python dict to JSON",
+            "Handles nested dictionaries",
+            "Converts True/False/None to JSON equivalents",
+            "Converts single quotes to double quotes",
+            "Runs entirely in the browser — data never leaves your device"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://dict2json.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is a Python dictionary?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A Python dictionary is a built-in data structure that stores key-value pairs. Keys must be unique and immutable; values can be any type, including other dictionaries. Dictionaries are mutable and preserve insertion order in Python 3.7+."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is JSON?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "JSON (JavaScript Object Notation) is a lightweight, text-based data interchange format. It is language-independent, supports strings, numbers, booleans, null, arrays, and objects, and uses double quotes for strings and property names."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is Python dict syntax different from JSON?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Python uses True, False, and None where JSON uses true, false, and null. Python allows single or double quotes; JSON requires double quotes only. JSON does not support comments or trailing commas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my data sent to a server?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. All conversion happens in your browser. The Python dictionary you paste never leaves your device."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does the converter support nested dictionaries?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Nested dictionaries, lists, and mixed structures are converted recursively to valid JSON."
+              }
+            }
+          ]
+        }
+      ]
+    }</script><script defer="defer" src="bundle.js"></script></head><body><h1>Python Dict to JSON Converter</h1><p class="subheading">Paste your Python dictionary to convert it to valid JSON format instantly</p><div id="root"></div><main class="content-section"><section class="recommended-reading" id="recommended-reading"><h2>Recommended Reading</h2><p class="affiliate-note">The links below are Amazon affiliate links. If you purchase through them, we may earn a small commission at no extra cost to you.</p><ul><li><strong><a href="https://www.amazon.com/dp/1492056359?tag=dict2json-20" target="_blank" rel="sponsored nofollow noopener">Fluent Python (2nd Edition)</a></strong> by Luciano Ramalho &mdash; The definitive guide to Python's data model. Essential reading if you work with dictionaries, classes, and idiomatic Python day-to-day.</li><li><strong><a href="https://www.amazon.com/dp/1718502702?tag=dict2json-20" target="_blank" rel="sponsored nofollow noopener">Python Crash Course (3rd Edition)</a></strong> by Eric Matthes &mdash; The most popular hands-on introduction to Python. Great for anyone newer to the language.</li><li><strong><a href="https://www.amazon.com/dp/1593279922?tag=dict2json-20" target="_blank" rel="sponsored nofollow noopener">Automate the Boring Stuff with Python (2nd Edition)</a></strong> by Al Sweigart &mdash; Practical Python for working with files, JSON, web data, and everyday automation.</li></ul></section><h2 id="about">About Python Dictionaries and JSON</h2><section id="what-is-a-python-dictionary"><h3>What is a Python Dictionary?</h3><p>A Python dictionary is a built-in data structure that stores key-value pairs. It's one of Python's most useful and widely-used data types, allowing you to create mappings between related pieces of information. Dictionaries are defined using curly braces <code>{}</code> with key-value pairs separated by commas.</p><h4>Key Features of Python Dictionaries:</h4><ul><li>Keys must be unique and immutable (strings, numbers, or tuples)</li><li>Values can be of any type, including other dictionaries</li><li>Dictionaries are mutable and can be modified after creation</li><li>Order is preserved in Python 3.7+ (unordered in earlier versions)</li></ul><p>Learn more about Python dictionaries in the <a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries" target="_blank" rel="noopener">official Python documentation</a>.</p></section><section id="what-is-json"><h3>What is JSON?</h3><p>JSON (JavaScript Object Notation) is a lightweight, text-based data interchange format that's easy for humans to read and write and easy for machines to parse and generate. It's language-independent and has become one of the most popular data formats for web APIs and configuration files.</p><h4>Key Features of JSON:</h4><ul><li>Data types: strings, numbers, booleans, null, arrays, and objects</li><li>Uses double quotes for strings and property names</li><li>No support for comments or trailing commas</li><li>Widely supported across programming languages</li></ul><p>Learn more about JSON at <a href="https://www.json.org/" target="_blank" rel="noopener">json.org</a>.</p></section><section id="dict-vs-json"><h3>Converting Between Python Dictionaries and JSON</h3><p>While Python dictionaries and JSON objects are similar, there are some key differences in syntax and data types:</p><table><thead><tr><th>Python</th><th>JSON</th></tr></thead><tbody><tr><td>True/False</td><td>true/false</td></tr><tr><td>None</td><td>null</td></tr><tr><td>Single or double quotes</td><td>Double quotes only</td></tr></tbody></table><p>Our converter handles these differences automatically, ensuring your Python dictionary is properly converted to valid JSON format.</p></section><section id="use-cases"><h3>Common Use Cases</h3><ul><li>Converting configuration files between Python and JSON formats</li><li>Preparing data for REST APIs that require JSON</li><li>Debugging Python dictionary structures</li><li>Learning the differences between Python and JSON syntax</li></ul></section></main><footer><p>For more information about data structures and formats, visit:</p><ul><li><a href="https://www.python.org/doc/" target="_blank" rel="noopener">Python Documentation</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON" target="_blank" rel="noopener">MDN Web Docs - JSON</a></li></ul><p class="affiliate-disclosure"><small>As an Amazon Associate, we earn from qualifying purchases. This site may contain affiliate links; we may earn a commission at no extra cost to you.</small></p><p><small><a href="/privacy">Privacy Policy</a></small></p></footer><script async src="https://www.googletagmanager.com/gtag/js?id=G-QFE6TJB3X9"></script><script>window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
       gtag('config', 'G-QFE6TJB3X9');</script></body></html>
