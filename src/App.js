@@ -64,8 +64,6 @@ function App() {
 
   return (
     <div className={`app ${isFullScreen ? 'full-screen' : ''}`}>
-      <h1>Python Dict to JSON Converter</h1>
-      <p className="subheading">Paste your Python dictionary to convert it to valid JSON format instantly</p>
       <Toast show={showToast} />
       <TshirtAds />
 

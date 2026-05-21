@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dict2json.com/sitemap.xml
